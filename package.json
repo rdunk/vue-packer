@@ -2,13 +2,26 @@
   "name": "vue-packer",
   "version": "0.1.0",
   "description": "Vue component for responsive cascading grid layouts",
-  "main": "index.js",
+  "main": "dist/vue-packer.js",
   "scripts": {
     "build": "node build.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC",
+  "files": [
+    "dist"
+  ],
+  "keywords": [
+    "grid",
+    "masonry",
+    "vue",
+    "component"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rdunk/vue-packer.git"
+  },
+  "author": "Rupert Dunk",
+  "license": "MIT",
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-preset-env": "^1.6.1",
@@ -18,5 +31,6 @@
     "rollup-plugin-eslint": "^4.0.0",
     "rollup-plugin-uglify": "^3.0.0",
     "vue": "^2.5.13"
-  }
+  },
+  "dependencies": {}
 }
