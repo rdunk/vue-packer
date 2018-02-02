@@ -24,10 +24,10 @@ Vue.use(VuePacker);
 
 ### HTML
 
-Wrap the items you want to display in the grid in the component.
+Wrap the items you want to display in the grid in the component. The `reactor` property is used to determine when DOM updates should be triggered. It is only necessary if the component needs to react to the number or order of elements. The value of this property should be an **array of unique keys for each element**. If the component only needs to render once on load, you can omit this prop.
 
 ```html
-<vue-packer>
+<vue-packer :reactor="foo">
   <div v-for="item of items"/>
 </vue-packer>
 ```
@@ -48,6 +48,7 @@ The following props can be passed to the plugin component. Note that class exten
 
 |Prop|Default|Description|Type|
 |:---|---|---|---|
+|`reactor`|`false`|The data the component watches to detect changes|Array, Boolean|
 |`tag`|div|The root element tag|String|
 |`baseClass`|packer|The root element class|String|
 |`sizerClass`|sizer|The class extension for the sizer element|String|
@@ -57,6 +58,10 @@ The following props can be passed to the plugin component. Note that class exten
 ## Plugin Options
 
 By default, this plugin uses flexbox. If you need to disable the inline styles for whatever reason and apply CSS rules directly to the column or container elements via class selectors, set the `inlineStyles` option to false.
+
+```js
+Vue.use(VuePacker, { inlineStyles: false });
+```
 
 |Option|Default|Type|
 |:---|---|---|
