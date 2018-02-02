@@ -10,7 +10,7 @@ Many grid style layout options use existing libraries that perform direct DOM ma
 
 Install via npm
 ```
-npm install vue-packer -D
+npm install vue-packer
 ```
 
 ```js
