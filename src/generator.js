@@ -1,20 +1,38 @@
+const StyleGenerator = function(inlineStyles) {
+  const styles = {
+    column: {},
+    container: {},
+  };
+  if (inlineStyles) {
+    styles.column = {
+      '-webkit-box-flex': 1,
+      '-ms-flex': 1,
+      flex: 1,
+    };
+    styles.container = {
+      display: ['-webkit-box', '-ms-flexbox', 'flex'],
+      '-webkit-box-align': 'start',
+      '-ms-flex-align': 'start',
+      'align-items': 'flex-start',
+      '-webkit-box-pack': 'center',
+      '-ms-flex-pack': 'center',
+      'justify-content': 'center',
+      '-ms-flex-wrap': 'wrap',
+      'flex-wrap': 'wrap',
+    };
+  }
+  return styles;
+};
+
 const PackerGenerator = function(options = {
   inlineStyles: true,
 }) {
-  const styles = {
-    column: options.inlineStyles ? {
-      flex: 1,
-    } : {},
-    container: options.inlineStyles ? {
-      display: 'flex',
-      'align-items': 'flex-start',
-      'justify-content': 'center',
-      'flex-wrap': 'wrap',
-    } : {},
-  };
+
+  const styles = StyleGenerator(options.inlineStyles);
 
   const PackerComponent = {
     mounted() {
+      this.setContent();
       this.build();
       window.addEventListener('resize', this.onResize);
     },
@@ -22,6 +40,10 @@ const PackerGenerator = function(options = {
       window.removeEventListener('resize', this.onResize);
     },
     props: {
+      reactor: {
+        type: [Array, Boolean],
+        default: false,
+      },
       baseClass: {
         type: String,
         default: 'packer',
@@ -45,15 +67,13 @@ const PackerGenerator = function(options = {
         calculating: false,
         columnCount: 0,
         columns: [],
+        content: [],
         initialized: false,
         items: [],
         queue: [],
       };
     },
     computed: {
-      content() {
-        return this.$slots.default;
-      },
       sizerStyle() {
         return this.calculating ? {
           display: 'block',
@@ -64,21 +84,37 @@ const PackerGenerator = function(options = {
           };
       },
     },
-    methods: {
-      onResize() {
-        this.build();
+    watch: {
+      reactor(newData) {
+        if (newData !== false && newData !== this.content) {
+          this.setContent();
+          this.rebuild();
+        }
       },
-      build() {
+    },
+    methods: {
+      setContent() {
+        // May want to update this in future to allow content to be passed through a prop
+        this.content = this.$slots.default;
+      },
+      // On resize, check if we have changed the number of columns
+      onResize() {
         // If we are currently building, exit
         if (this.building) return false;
         this.building = true;
-        // Get the current number of columns
         const currentColumnCount = this.columnCount;
-        // Set the column count, and if it has changed, we rebuild
         return this.setColumnCount().then(() => {
+          // Only rebuild if the column count has changed
           if (this.columnCount !== currentColumnCount) {
             this.rebuild();
           }
+          this.building = false;
+        });
+      },
+      build() {
+        this.building = true;
+        return this.setColumnCount().then(() => {
+          this.rebuild();
           this.building = false;
         });
       },
