@@ -27,10 +27,7 @@
     "babel-preset-env": "^1.6.1",
     "eslint": "^4.16.0",
     "rollup": "^0.55.1",
-    "rollup-plugin-babel": "^3.0.3",
-    "rollup-plugin-eslint": "^4.0.0",
-    "rollup-plugin-uglify": "^3.0.0",
-    "vue": "^2.5.13"
+    "rollup-plugin-babel": "^3.0.3"
   },
   "dependencies": {}
 }

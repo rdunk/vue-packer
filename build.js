@@ -15,7 +15,6 @@ const outputOptions = {
 
 async function build() {
   const bundle = await rollup.rollup(inputOptions);
-  // generate code and sourcemap
   await bundle.write(outputOptions);
 }
 
