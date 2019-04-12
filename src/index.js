@@ -6,3 +6,5 @@ export default {
     Vue.component('vue-packer', component);
   },
 };
+
+export { PackerGenerator };
