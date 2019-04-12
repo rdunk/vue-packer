@@ -1,6 +1,6 @@
 {
   "name": "vue-packer",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Vue component for responsive cascading grid layouts",
   "main": "lib/vue-packer.js",
   "scripts": {
