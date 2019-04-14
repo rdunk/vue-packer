@@ -1,12 +1,12 @@
 <p align="center">
-  <img width="384" src="https://github.com/rdunk/vue-packer/blob/master/grid.png" alt="Vue Packer">
+  <img src="https://github.com/rdunk/vue-packer/blob/master/grid.png" alt="Vue Packer">
 </p>
 
 <h1 align="center">Vue Packer</h1>
 
-##### A dependency free Vue component for responsive masonry-style cascading grid layouts.
+#### A dependency free Vue component for responsive masonry-style cascading grid layouts.
 
-###### [See the demo](https://rdunk.github.io/vue-packer)
+#### [See the demo](https://rdunk.github.io/vue-packer)
 
 Many grid style layout options use existing libraries that perform direct DOM manipulation. This plugin lets Vue take care of all changes to the DOM, so can take advantage of Vue's reactive data without the need for any workarounds or performance drawbacks.
 
